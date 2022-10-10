@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:foodu/pages/favorite_page.dart';
-import 'package:foodu/pages/home_page.dart';
-import 'package:foodu/pages/profile_page.dart';
-import 'package:foodu/pages/shopping_list_page.dart';
+import 'package:foodu/views/favorite_page.dart';
+import 'package:foodu/views/home_page.dart';
+import 'package:foodu/views/profile_page.dart';
+import 'package:foodu/views/shopping_list_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+// This main page can act as the base page for all of our screens which will contains the bottom navigation bar 
 class Main_Page extends StatefulWidget {
   const Main_Page({Key? key}) : super(key: key);
 
@@ -13,10 +14,13 @@ class Main_Page extends StatefulWidget {
 }
 
 class _MainPageState extends State<Main_Page> {
+  //initialize selected index to 0 to make Home page the default page when first logged in
   int _selectedIndex = 0;
-  final List<Widget> _pages = [Home_Page(),Favorite_Page(),Shopping_Page(),Profile_Page()];
+  // list of widgets index based on the location of icon in the navigation bar
+  final List<Widget> _pages = [HomePage(),FavoritePage(),ShoppingPage(),ProfilePage()];
 
   void _navigateBottomBar(int index) {
+    // the setState method will notify the framework that the selected index has changed
     setState(() {
       _selectedIndex = index;
     });
@@ -37,7 +41,7 @@ class _MainPageState extends State<Main_Page> {
               tabBackgroundColor: Color.fromARGB(255, 58, 57, 57),
               padding: EdgeInsets.all(16),
               gap: 8, //Gap between icon and text
-              onTabChange: _navigateBottomBar,
+              onTabChange: _navigateBottomBar,// when a tab is clicked, call nagivateBottomBar to set new index
               tabs: [
                 GButton(
                   icon: Icons.home, 
