@@ -19,9 +19,16 @@ class RecipeApi {
     });
 
     Map data = jsonDecode(response.body);
-    List temp = [];
+    List<List> temp = [];
     for (var i in data['feed']) {
-      temp.add(i['content']['details']);
+      temp.add([
+        i['content']['details'],//title, rating, cooktime , and image
+        i['content']['ingredientLines'],//ingredients
+        i['content']['preparationSteps'],//steps
+        i['content']['nutrition']['nutritionEstimates'],
+        
+        
+        ]);
     }
     return Recipe.recipesFromSnapshot(temp);
   }

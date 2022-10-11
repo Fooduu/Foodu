@@ -32,11 +32,14 @@ class _HomePageState extends State<HomePage> {
   Future<void> getRecipes() async {
     _recipes = await RecipeApi.getRecipe();
 
+    // to ensure setState() is not called after dispose()
+    if (this.mounted) {
     // the setState method will notify the framework that the internal state of this object has changed
-    setState(() {
-      _isLoading = false;
-      // print(_recipes);
-    });
+      setState(() {
+        _isLoading = false;
+        print(_recipes);
+      });
+    }
   }
 
   @override
@@ -62,9 +65,20 @@ class _HomePageState extends State<HomePage> {
                             rating: _recipes[index].rating.toString(),
                             cookTime: _recipes[index].totalTime,
                             thumbnailUrl: _recipes[index].images),
-                        // onTap: () {
-                        //   RecipeDetail();
-                        // },
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return RecipeDetail(
+                              title: _recipes[index].name,
+                              rating: _recipes[index].rating.toString(),
+                              cookTime: _recipes[index].totalTime,
+                              thumbnailUrl: _recipes[index].images,
+                              ingredients: _recipes[index].ingredients,
+                              prepSteps: _recipes[index].prepSteps,
+                              nutritions: _recipes[index].nutrition,
+                            );
+                          }));
+                        },
                       );
                     },
                   ));

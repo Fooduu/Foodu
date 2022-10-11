@@ -11,6 +11,7 @@ class RecipeCard extends StatelessWidget {
     required this.rating,
     required this.thumbnailUrl,
   });
+  
   @override
   Widget build(BuildContext context) {
     return Container(
