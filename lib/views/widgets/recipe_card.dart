@@ -11,6 +11,7 @@ class RecipeCard extends StatelessWidget {
     required this.rating,
     required this.thumbnailUrl,
   });
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,6 +50,8 @@ class RecipeCard extends StatelessWidget {
                 
                 title,
                 style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                   fontSize: 19,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -66,7 +69,7 @@ class RecipeCard extends StatelessWidget {
                   padding: EdgeInsets.all(5),
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
+                    color: Color.fromARGB(255, 255, 249, 249).withOpacity(0.4),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
@@ -77,7 +80,10 @@ class RecipeCard extends StatelessWidget {
                         size: 18,
                       ),
                       SizedBox(width: 7),
-                      Text(rating),
+                      Text(
+                        rating,
+                        style: TextStyle(fontWeight: FontWeight.bold )
+                      ),
                     ],
                   ),
                 ),
@@ -85,7 +91,7 @@ class RecipeCard extends StatelessWidget {
                   padding: EdgeInsets.all(5),
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
+                    color: Color.fromARGB(255, 255, 255, 255).withOpacity(0.4),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
@@ -96,7 +102,10 @@ class RecipeCard extends StatelessWidget {
                         size: 18,
                       ),
                       SizedBox(width: 7),
-                      Text(cookTime),
+                      Text(
+                        cookTime,
+                        style: TextStyle(fontWeight: FontWeight.bold )
+                      ),
                     ],
                   ),
                 )

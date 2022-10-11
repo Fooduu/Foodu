@@ -11,7 +11,7 @@ class RecipeApi {
     var uri = Uri.https('yummly2.p.rapidapi.com', 'feeds/list',
     //list.recipe.popular is used to limit the amount of null data when query
     
-        {"limit": "1", "start": "0", "tag": "list.recipe.popular"});
+        {"limit": "3", "start": "0", "tag": "list.recipe.popular"});
     final response = await http.get(uri, headers: {
       "X-RapidAPI-Key": "c5cb193cddmsh787fca40c4ea65cp11c2aajsn4cba680d9168",
       "X-RapidAPI-Host": "yummly2.p.rapidapi.com",
@@ -19,9 +19,16 @@ class RecipeApi {
     });
 
     Map data = jsonDecode(response.body);
-    List temp = [];
+    List<List> temp = [];
     for (var i in data['feed']) {
-      temp.add(i['content']['details']);
+      temp.add([
+        i['content']['details'],//title, rating, cooktime , and image
+        i['content']['ingredientLines'],//ingredients
+        i['content']['preparationSteps'],//steps
+        i['content']['nutrition']['nutritionEstimates'],
+        
+        
+        ]);
     }
     return Recipe.recipesFromSnapshot(temp);
   }
