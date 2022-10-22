@@ -1,7 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:foodu/constants.dart';
+import 'views/welcome_page.dart';
 import 'views/main_page.dart';
+import 'dart:ui' as ui;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  
   runApp(const MyApp());
 }
 
@@ -10,10 +17,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: Main_Page(),
+      theme: ThemeData(
+          primaryColor: backgroundColor,
+          scaffoldBackgroundColor: backgroundColor),
+      home: Welcome_Page(),
     );
   }
 }
