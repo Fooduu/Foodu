@@ -4,10 +4,11 @@ import 'package:foodu/constants.dart';
 import 'views/welcome_page.dart';
 import 'views/main_page.dart';
 import 'dart:ui' as ui;
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   
   runApp(const MyApp());
 }
