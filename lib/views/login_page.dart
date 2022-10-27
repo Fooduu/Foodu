@@ -1,61 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:foodu/constants.dart';
+import 'package:foodu/views/components/rounded_button.dart';
 import 'package:foodu/views/main_page.dart';
+import 'package:foodu/views/register_page.dart';
+import 'components/already_have_an_account_check.dart';
+import 'components/round_password_field.dart';
+import 'components/rounded_input_field.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context)
         .size; // This is provides the total width and height of our screen
-    return Scaffold(body: Container(
-        margin: EdgeInsets.only(top: 300), // margin from the top of the screen
+    return Scaffold(
+      body: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text(
-              "Welcome to Foodu",
-              style: TextStyle(color: textColor, fontSize: 35),
+            const Text(
+              "Sign in",
+              style: TextStyle(
+                  color: buttonColor,
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold),
             ),
-            Container(
-              width: size.width * 0.7,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(29),
-                child: FlatButton(
-                    // ignore: prefer_const_constructors
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                    color: textColor,
-                    onPressed: () {},
-                    child: Text(
-                      "Sign Up",
-                      style: TextStyle(color: backgroundColor),
-                    )),
-              ),
+            SizedBox(height: size.height * 0.3),
+            RoundedInputField(
+              hintText: "Username",
+              onChanged: (value) {},
             ),
-            Container(
-              width: size.width * 0.7,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(29),
-                child: FlatButton(
-                    // ignore: prefer_const_constructors
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                    color: textColor,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return Main_Page();
-                          },
-                        ),
-                      );
+            RoundedPasswordField(
+              onChanged: (value) {},
+            ),
+            RoundedButton(
+              text: "LOGIN",
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const Main_Page();
                     },
-                    child: Text(
-                      "Login",
-                      style: TextStyle(color: backgroundColor),
-                    )),
-              ),
+                  ),
+                );
+              },
+            ),
+            SizedBox(height: size.height * 0.03),
+            AlreadyHaveAnAccountCheck(
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const RegisterPage();
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),
-      ),);
+      ),
+    );
   }
 }
