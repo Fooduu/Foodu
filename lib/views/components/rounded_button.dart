@@ -38,7 +38,7 @@ class RoundedButton extends StatelessWidget {
                 style: TextButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                  foregroundColor: textColor,
+                  backgroundColor: textColor,
                   minimumSize: const Size.fromHeight(50),
                 ),
                 onPressed: press,
