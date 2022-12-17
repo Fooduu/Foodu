@@ -30,6 +30,7 @@ class _MainPageState extends State<Main_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         color: Colors.black,
@@ -55,7 +56,7 @@ class _MainPageState extends State<Main_Page> {
                   text: "Favorites"),
                 GButton(
                   icon: Icons.list_alt_rounded,
-                   text: "Shopping List"),
+                   text: "Cart"),
                 GButton(
                   icon: Icons.account_circle_outlined,
                   text: "Profile",

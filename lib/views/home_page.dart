@@ -45,13 +45,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: Row(
-          children: [
-            Icon(Icons.restaurant_menu),
-            Text('Foodu'),
-          ],
-        )),
+
         body:
             // if still wating for api call(_isLoading = true), display loading circle, else display recipe // change to stream builder later
             _isLoading

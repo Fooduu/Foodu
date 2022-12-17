@@ -16,12 +16,14 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterPage> {
+
+  // hold the input email and password from register
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size; // This is provides the total width and height of our screen
     return Scaffold(
       body: Center(
         child: Column(
@@ -34,19 +36,24 @@ class _RegisterScreenState extends State<RegisterPage> {
                   fontSize: 35,
                   fontWeight: FontWeight.bold),
             ),
+            // Empty box to create white space 
             SizedBox(height: size.height * 0.3),
+            // Email text field
             RoundedInputField(
               hintText: "Email",
               onChanged: (value) {},
               controller: _controllerEmail,
             ),
+            // Password text field
             RoundedPasswordField(
               onChanged: (value) {},
               controller: _controllerPassword,
             ),
+            // Button that takes user data and creates account. It then takes you to the main page.
             RoundedButton(
               text: "SIGN UP",
               press: () {
+                // calls the method 'signInWithEmailAndPassword' from FirebaseAuth in which we are using to sign in. This method takes two arguments 'email' and 'password' which are stored in the controller
                 FirebaseAuth.instance
                     .createUserWithEmailAndPassword(
                         email: _controllerEmail.text,
@@ -66,6 +73,7 @@ class _RegisterScreenState extends State<RegisterPage> {
                 });
               },
             ),
+            // Empty box to create white space 
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
               login: false,

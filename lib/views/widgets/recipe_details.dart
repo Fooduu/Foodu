@@ -23,13 +23,17 @@ class RecipeDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
+      extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Container(
-            child: Text("Recipe Details"),
-          ),
+          title: Text("Recipe Details"),
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
         body: Column(children: <Widget>[
+          SizedBox(height: size.height * 0.1),
           Image(image: NetworkImage(thumbnailUrl)),
           Text(title),
           Text(rating),
