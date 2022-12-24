@@ -25,7 +25,7 @@ class _LoginInScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size; // This is provides the total width and height of our screen
+    Size size = MediaQuery.of(context).size; // This provides the total width and height of our screen
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Center(
@@ -52,7 +52,7 @@ class _LoginInScreenState extends State<LoginScreen> {
               onChanged: (value) {},
               controller: _controllerPassword,
             ),
-            // button for login that takes you to the main page
+            // button to login that takes you to the main page
             RoundedButton(
               text: "LOGIN",
               press: () {

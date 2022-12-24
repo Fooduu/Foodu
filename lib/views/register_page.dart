@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:foodu/constants.dart';
@@ -16,15 +17,16 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterPage> {
-
   // hold the input email and password from register
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size; // This is provides the total width and height of our screen
+    Size size = MediaQuery.of(context)
+        .size; // This is provides the total width and height of our screen
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +38,7 @@ class _RegisterScreenState extends State<RegisterPage> {
                   fontSize: 35,
                   fontWeight: FontWeight.bold),
             ),
-            // Empty box to create white space 
+            // Empty box to create white space
             SizedBox(height: size.height * 0.3),
             // Email text field
             RoundedInputField(
@@ -52,14 +54,19 @@ class _RegisterScreenState extends State<RegisterPage> {
             // Button that takes user data and creates account. It then takes you to the main page.
             RoundedButton(
               text: "SIGN UP",
-              press: () {
+              press: () async {
                 // calls the method 'signInWithEmailAndPassword' from FirebaseAuth in which we are using to sign in. This method takes two arguments 'email' and 'password' which are stored in the controller
                 FirebaseAuth.instance
                     .createUserWithEmailAndPassword(
                         email: _controllerEmail.text,
                         password: _controllerPassword.text)
                     .then((value) {
-                  print("Created New Account");
+                  FirebaseFirestore.instance
+                      .collection('Users')
+                      .doc(value.user?.uid)
+                      .set({
+                        "email": value.user?.email,
+                        "recipes": [{}]});
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -73,7 +80,7 @@ class _RegisterScreenState extends State<RegisterPage> {
                 });
               },
             ),
-            // Empty box to create white space 
+            // Empty box to create white space
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
               login: false,

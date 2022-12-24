@@ -1,5 +1,7 @@
 //Custom recipe card widget
 import 'package:flutter/material.dart';
+import 'package:foodu/views/favorite_page.dart';
+
 class RecipeCard extends StatelessWidget {
   final String title;
   final String rating;
@@ -11,7 +13,7 @@ class RecipeCard extends StatelessWidget {
     required this.rating,
     required this.thumbnailUrl,
   });
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,10 +46,10 @@ class RecipeCard extends StatelessWidget {
       child: Stack(
         children: [
           Align(
+            alignment: Alignment.center,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.0),
               child: Text(
-                
                 title,
                 style: TextStyle(
                   color: Colors.white,
@@ -59,9 +61,9 @@ class RecipeCard extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            alignment: Alignment.center,
           ),
           Align(
+            alignment: Alignment.bottomLeft,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -74,16 +76,14 @@ class RecipeCard extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.star,
                         color: Colors.yellow,
                         size: 18,
                       ),
-                      SizedBox(width: 7),
-                      Text(
-                        rating,
-                        style: TextStyle(fontWeight: FontWeight.bold )
-                      ),
+                      const SizedBox(width: 7),
+                      Text(rating,
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),
@@ -96,22 +96,19 @@ class RecipeCard extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.schedule,
                         color: Colors.yellow,
                         size: 18,
                       ),
                       SizedBox(width: 7),
-                      Text(
-                        cookTime,
-                        style: TextStyle(fontWeight: FontWeight.bold )
-                      ),
+                      Text(cookTime,
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
                 )
               ],
             ),
-            alignment: Alignment.bottomLeft,
           ),
         ],
       ),
