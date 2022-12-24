@@ -4,7 +4,7 @@ import 'package:foodu/models/recipe.dart';
 import 'package:http/http.dart' as http;
 
 class RecipeApi {
-  static Future<List<Recipe>> getRecipe() async {
+  static Future<List<Recipe>> getRecipe(        ) async {
     
     // http takes 3 arguments: authority, path, and query
     // URI is a Universal Resource Idetifier, identifying where a specific resource can be found
