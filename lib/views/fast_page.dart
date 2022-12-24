@@ -10,7 +10,7 @@ class FastPage extends StatefulWidget {
   @override
   State<FastPage> createState() => _FastPageState();
 }
-
+//
 class _FastPageState extends State<FastPage> {
   @override
   Widget build(BuildContext context) {

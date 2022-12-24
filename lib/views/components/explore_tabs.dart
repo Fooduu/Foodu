@@ -8,7 +8,7 @@ class ExploreTab extends StatelessWidget {
     required this.text, 
     required this.image,
   }) : super(key: key);
-
+//
   @override
   Widget build(BuildContext context) {
     return Container(

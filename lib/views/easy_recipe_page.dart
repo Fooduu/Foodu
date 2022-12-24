@@ -6,7 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class QuickAndEasyPage extends StatefulWidget {
   const QuickAndEasyPage({Key? key}) : super(key: key);
-
+//
   @override
   State<QuickAndEasyPage> createState() => _QuickAndEasyPageState();
 }
