@@ -8,7 +8,7 @@ class Recipe {
   final List ingredients;
   final List prepSteps;
   final List nutrition;
-
+  // Constructor
   Recipe({
     required this.name,
     required this.images,
@@ -19,7 +19,7 @@ class Recipe {
     required this.nutrition,
   });
 
-  // this factory constructor initialize a final variable from a JSON object
+  // function will map the json into a list
   // facotry constructors have no access to "this"
   factory Recipe.fromJson(dynamic json) {
     return Recipe(
