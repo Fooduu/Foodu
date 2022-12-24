@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
     // to ensure setState() is not called after dispose()
     if (this.mounted) {
-    // the setState method will notify the framework that the internal state of this object has changed
+      // the setState method will notify the framework that the internal state of this object has changed
       setState(() {
         _isLoading = false;
         print(_recipes);
@@ -45,7 +45,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         body:
             // if still wating for api call(_isLoading = true), display loading circle, else display recipe // change to stream builder later
             _isLoading

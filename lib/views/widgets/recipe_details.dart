@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class RecipeDetail extends StatelessWidget {
+import '../main_page.dart';
+
+class RecipeDetail extends StatefulWidget {
   final String title;
   final String rating;
   final String cookTime;
@@ -22,31 +24,74 @@ class RecipeDetail extends StatelessWidget {
   });
 
   @override
+  State<RecipeDetail> createState() => _RecipeDetailState();
+}
+
+class _RecipeDetailState extends State<RecipeDetail> {
+  bool _isFavorited = false;
+  @override
   Widget build(BuildContext context) {
+    // creates map that hold the recipe details to add to database if favorited
+    var recipe = {
+      'Title': widget.title,
+      'Rating': widget.rating,
+      'Cook Time': widget.cookTime,
+      'thumbnail': widget.thumbnailUrl,
+      'Ingredients': widget.ingredients,
+      'Instructions': widget.prepSteps,
+      'Nutrition': widget.nutritions
+    };
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      extendBodyBehindAppBar: true,
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: Text("Recipe Details"),
           centerTitle: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Color.fromARGB(0, 207, 23, 23),
           elevation: 0,
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: IconButton(
+                icon: (_isFavorited
+                    ? const Icon(Icons.favorite)
+                    : const Icon(Icons.favorite_border)),
+                color: (_isFavorited)
+                    ? Color.fromARGB(255, 255, 0, 0)
+                    : Color.fromARGB(255, 255, 0, 0),
+                onPressed: () {
+                  setState(() {
+                    if (_isFavorited) {
+                      _isFavorited = false;
+                    } else {
+                      _isFavorited = true;
+                    }
+                  });
+                  FirebaseFirestore.instance
+                      .collection("Users")
+                      .doc(FirebaseAuth.instance.currentUser?.uid)
+                      .set(recipe, SetOptions(merge: true));
+                },
+              ),
+            )
+          ],
         ),
         body: Column(children: <Widget>[
           SizedBox(height: size.height * 0.1),
-          Image(image: NetworkImage(thumbnailUrl)),
-          Text(title),
-          Text(rating),
-          Text(cookTime),
+          Image(image: NetworkImage(widget.thumbnailUrl)),
+          Text(widget.title),
+          Text(widget.rating),
+          Text(widget.cookTime),
           Text("Ingredients:"),
           Expanded(
             child: SizedBox(
               height: 50.0,
               child: new ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: ingredients.length,
+                itemCount: widget.ingredients.length,
                 itemBuilder: (context, index) {
-                  return new Text("* " + ingredients[index]);
+                  return new Text("* " + widget.ingredients[index]);
                 },
               ),
             ),
@@ -57,9 +102,9 @@ class RecipeDetail extends StatelessWidget {
               height: 25.0,
               child: new ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: nutritions.length,
+                itemCount: widget.nutritions.length,
                 itemBuilder: (context, index) {
-                  return new Text("* " + nutritions[index]);
+                  return new Text("* " + widget.nutritions[index]);
                 },
               ),
             ),
@@ -70,9 +115,9 @@ class RecipeDetail extends StatelessWidget {
               height: 300.0,
               child: new ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: prepSteps.length,
+                itemCount: widget.prepSteps.length,
                 itemBuilder: (context, index) {
-                  return new Text("* " + prepSteps[index]);
+                  return new Text("* " + widget.prepSteps[index]);
                 },
               ),
             ),
