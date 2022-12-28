@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../main_page.dart';
-
 class RecipeDetail extends StatefulWidget {
   final String title;
   final String rating;

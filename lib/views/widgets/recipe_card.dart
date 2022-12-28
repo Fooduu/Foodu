@@ -1,6 +1,5 @@
 //Custom recipe card widget
 import 'package:flutter/material.dart';
-import 'package:foodu/views/favorite_page.dart';
 
 class RecipeCard extends StatelessWidget {
   final String title;

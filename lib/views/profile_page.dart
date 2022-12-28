@@ -1,15 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:foodu/views/register_page.dart';
-
 import '../constants.dart';
-import 'components/already_have_an_account_check.dart';
 import 'components/rounded_button.dart';
-import 'components/rounded_input_field.dart';
 import 'login_page.dart';
-import 'main_page.dart';
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
