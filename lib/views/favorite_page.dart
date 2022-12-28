@@ -1,31 +1,37 @@
-
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:foodu/constants.dart';
+class FavoritePage extends StatefulWidget {
+  const FavoritePage({Key? key}) : super(key: key);
 
-class FavoritePage extends StatelessWidget {
-	const FavoritePage({Key? key}) : super(key: key);
+  @override
+  State<FavoritePage> createState() => _FavoritePageState();
+}
 
-	@override
-	Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context)
-        .size; // This is provides the total width and height of our screen
-		return Scaffold(
-			body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const Text(
-              "Favorites",
-              style: TextStyle(
-                  color: buttonColor,
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: size.height * 0.3),
-          ],
-        ),
-      ),
-		);
-	}
+class _FavoritePageState extends State<FavoritePage> {
+  late List<dynamic> recipes;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getData();
+  // }
+
+  // getData() {
+  //   FirebaseFirestore.instance
+  //       .collection("Users")
+  //       .doc(FirebaseAuth.instance.currentUser?.uid)
+  //       .get()
+  //       .then((value) {
+  //     print(value)
+  //     recipes = value.data()["Recipes"];
+  //     print(recipes);
+  //   });
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
+  }
 }

@@ -66,7 +66,7 @@ class _RegisterScreenState extends State<RegisterPage> {
                       .doc(value.user?.uid)
                       .set({
                         "email": value.user?.email,
-                        "recipes": [{}]});
+                        });
                   Navigator.push(
                     context,
                     MaterialPageRoute(

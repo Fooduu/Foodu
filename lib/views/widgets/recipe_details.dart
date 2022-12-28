@@ -29,17 +29,17 @@ class _RecipeDetailState extends State<RecipeDetail> {
   bool _isFavorited = false;
   @override
   Widget build(BuildContext context) {
-    // creates map that hold the recipe details to add to database if favorited
-    var recipe = {
-      'Title': widget.title,
-      'Rating': widget.rating,
-      'Cook Time': widget.cookTime,
-      'thumbnail': widget.thumbnailUrl,
-      'Ingredients': widget.ingredients,
-      'Instructions': widget.prepSteps,
-      'Nutrition': widget.nutritions
+    // creates map that holds the recipe details to add to database if favorited
+    var recipe = <String, dynamic>{
+      "Title": widget.title,
+      "Rating": widget.rating,
+      "Cook Time": widget.cookTime,
+      "Thumbnail": widget.thumbnailUrl,
+      "Ingredients": widget.ingredients,
+      "Instructions": widget.prepSteps,
+      "Nutrition": widget.nutritions
     };
-
+  
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         extendBodyBehindAppBar: true,
@@ -60,16 +60,23 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     : Color.fromARGB(255, 255, 0, 0),
                 onPressed: () {
                   setState(() {
+                    // if recipe is favorited, when press it will unfavorite and remove it from the database
                     if (_isFavorited) {
                       _isFavorited = false;
+                      FirebaseFirestore.instance
+                          .collection("Users")                                      // searches for collection called "Users"
+                          .doc(FirebaseAuth.instance.currentUser?.uid)              // searches for document in collection that matches user id
+                          .update({"Recipes": FieldValue.arrayRemove([recipe])});   // updates array by searching the exact field names
+                    // if recipe is not favorited, when press it will favorite it and add it to the database
                     } else {
                       _isFavorited = true;
+                      FirebaseFirestore.instance
+                          .collection("Users")
+                          .doc(FirebaseAuth.instance.currentUser?.uid)
+                          .update({"Recipes": FieldValue.arrayUnion([recipe])
+                      });
                     }
                   });
-                  FirebaseFirestore.instance
-                      .collection("Users")
-                      .doc(FirebaseAuth.instance.currentUser?.uid)
-                      .set(recipe, SetOptions(merge: true));
                 },
               ),
             )
